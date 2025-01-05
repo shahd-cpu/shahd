@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب العمر</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>حساب العمر</h1>
+        <form id="ageForm">
+            <label for="birthdate">تاريخ الميلاد:</label>
+            <input type="date" id="birthdate" required>
+            <button type="submit">احسب العمر</button>
+        </form>
+        <p id="result" class="hidden"></p>
+    </div>
+
+    <script>
+        document.getElementById('ageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const today = new Date();
+            let age = today.getFullYear() - birthdate.getFullYear();
+            const monthDifference = today.getMonth() - birthdate.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+            document.getElementById('result').textContent = `عمرك هو ${age} سنة`;
+            document.getElementById('result').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
